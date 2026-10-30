@@ -1,0 +1,43 @@
+name: Build macOS app
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Show build toolchain
+        run: |
+          sw_vers
+          swift --version
+          xcodebuild -version
+
+      - name: Build universal app
+        env:
+          WSRESTORE_OUTPUT: ${{ runner.temp }}/微信截图恢复.app
+        run: scripts/package-macos-app.sh
+
+      - name: Verify packaged app
+        run: |
+          APP="${{ runner.temp }}/微信截图恢复.app"
+          /usr/bin/codesign --verify --deep --strict "$APP"
+          /usr/bin/plutil -lint "$APP/Contents/Info.plist"
+          /usr/bin/lipo -archs "$APP/Contents/MacOS/WeChatScreenshotRestoreApp"
+          /usr/bin/lipo -archs "$APP/Contents/Frameworks/libWindowSharingRuntime.dylib"
+
+      - name: Upload app bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: 微信截图恢复-macOS-universal
+          path: ${{ runner.temp }}/微信截图恢复.app
+          if-no-files-found: error
+          retention-days: 14
