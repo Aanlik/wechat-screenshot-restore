@@ -34,10 +34,17 @@ jobs:
           /usr/bin/lipo -archs "$APP/Contents/MacOS/WeChatScreenshotRestoreApp"
           /usr/bin/lipo -archs "$APP/Contents/Frameworks/libWindowSharingRuntime.dylib"
 
-      - name: Upload app bundle
+      - name: Package app for download
+        run: |
+          APP="${{ runner.temp }}/微信截图恢复.app"
+          ARCHIVE="${{ runner.temp }}/wechat-screenshot-restore-macos-universal.zip"
+          /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$APP" "$ARCHIVE"
+          /usr/bin/unzip -t "$ARCHIVE"
+
+      - name: Upload app archive
         uses: actions/upload-artifact@v6
         with:
           name: 微信截图恢复-macOS-universal
-          path: ${{ runner.temp }}/微信截图恢复.app
+          path: ${{ runner.temp }}/wechat-screenshot-restore-macos-universal.zip
           if-no-files-found: error
           retention-days: 14

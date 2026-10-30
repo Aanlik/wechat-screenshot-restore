@@ -44,7 +44,7 @@
 scripts/package-macos-app.sh
 ```
 
-脚本生成 arm64 与 x86_64 通用 App：`../微信截图恢复.app`。GitHub Actions 会在推送到 `main` 后构建并上传可下载的 macOS App 工件。该工件使用 ad-hoc 签名，未经 Apple 公证；首次打开时 Gatekeeper 可能提示无法验证开发者。
+脚本生成 arm64 与 x86_64 通用 App：`../微信截图恢复.app`。GitHub Actions 会在推送到 `main` 后构建，并上传包含 App 压缩包的工件（保留 14 天）；当前版本也发布在 [GitHub Releases](https://github.com/Aanlik/wechat-screenshot-restore/releases)。App 使用 ad-hoc 签名，未经 Apple 公证；首次打开时 Gatekeeper 可能提示无法验证开发者。
 
 ## 实现结构
 
