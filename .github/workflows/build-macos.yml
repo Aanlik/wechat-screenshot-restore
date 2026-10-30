@@ -13,7 +13,7 @@ jobs:
     runs-on: macos-15
     steps:
       - name: Check out source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Show build toolchain
         run: |
@@ -35,7 +35,7 @@ jobs:
           /usr/bin/lipo -archs "$APP/Contents/Frameworks/libWindowSharingRuntime.dylib"
 
       - name: Upload app bundle
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: 微信截图恢复-macOS-universal
           path: ${{ runner.temp }}/微信截图恢复.app
