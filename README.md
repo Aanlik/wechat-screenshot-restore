@@ -52,8 +52,3 @@ scripts/package-macos-app.sh
 - 安装事务：检查 Tencent Team ID、签名、版本/build、架构、隔离状态和进程；完整备份后暂存修改，再校验并原子切换。
 - Objective-C 运行时组件：只对官方微信 Bundle ID 启用，按 AppKit selector 定位 setter，不依赖固定机器码偏移或版本表。
 
-[fzlzjerry/wechat-antirecall](https://github.com/fzlzjerry/wechat-antirecall) 仅作问题背景参考；本项目不复用其源码、补丁、功能或版本表。第三方代码范围见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
-
-## 许可证
-
-仓库目前未附许可证。公开可见不等于授权复制、修改或再发布。
